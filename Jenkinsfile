@@ -1,14 +1,19 @@
 pipeline{
     agent any
     stages{
-        stage("RUN TEST"){
+        stage("Start GTID"){
             steps{
-                bat "docker-compose up"
+                bat "docker-compose up -d hub chrome firefox"
             }
         }
-        stage("BRING GRID DOWN"){
+        stage("RUN TESt"){
             steps{
-                bat "docker-compse down"
+                bat "docker-compose up search-model"
+            }
+        }
+        stage("STOP GRID"){
+            steps{
+                bat "docker-compose down"
             }
         }
     }
